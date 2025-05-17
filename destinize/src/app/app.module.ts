@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { DestinationCardComponent } from './components/destination-card/destination-card.component';
 import { DestinationListComponent } from './components/destination-list/destination-list.component';
+import { HeroSectionComponent } from './components/hero-section/hero-section.component';
+import { DestinationCarouselComponent } from './components/destination-carousel/destination-carousel.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { DestinationListComponent } from './components/destination-list/destinat
     HeaderComponent,
     DestinationCardComponent,
     DestinationListComponent,
+    HeroSectionComponent,
+    DestinationCarouselComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,6 @@ import { DestinationListComponent } from './components/destination-list/destinat
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]

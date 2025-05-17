@@ -9,10 +9,12 @@
 
   <!-- Search Bar -->
   <div class="search-container">
-    <div class="search-field">
-      <span class="search-icon">🔍</span>
-      <input type="text" placeholder="Search destinations..." [formControl]="searchControl">
-    </div>
+    <form (submit)="onSearchSubmit($event)" class="search-form">
+      <div class="search-field">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Search destinations by region/emojis" [formControl]="searchControl">
+      </div>
+    </form>
   </div>
 
   <!-- Navigation Links -->
@@ -22,7 +24,7 @@
     <button>Regions</button>
     <button>About</button>
   </div>
-  
+
   <!-- Mobile Menu Button -->
   <button class="mobile-menu-button">
     <span class="menu-icon">☰</span>

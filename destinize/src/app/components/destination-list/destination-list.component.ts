@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Destination } from '../../models/destination';
 import { DestinationService } from '../../services/destination.service';
+import { SearchService } from '../../services/search.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-destination-list',
@@ -8,22 +10,68 @@ import { DestinationService } from '../../services/destination.service';
   templateUrl: './destination-list.component.html',
   styleUrls: ['./destination-list.component.css']
 })
-export class DestinationListComponent implements OnInit {
+export class DestinationListComponent implements OnInit, OnDestroy {
   destinations: Destination[] = [];
   regions: string[] = [];
   filteredDestinations: Destination[] = [];
+  featuredDestinations: Destination[] = [];
+  asiaDestinations: Destination[] = [];
+  europeDestinations: Destination[] = [];
   selectedRegion: string = '';
   
-  constructor(private destinationService: DestinationService) {}
+  // Search related properties
+  searchResults: Destination[] = [];
+  currentSearchQuery: string = '';
+  showSearchResults: boolean = false;
+  
+  // Subscription management
+  private searchSubscription: Subscription = new Subscription();
+  private searchQuerySubscription: Subscription = new Subscription();
+  private hasSearchedSubscription: Subscription = new Subscription();
+  
+  constructor(
+    private destinationService: DestinationService,
+    public searchService: SearchService
+  ) {}
   
   ngOnInit(): void {
     this.loadDestinations();
+    
+    // Subscribe to search results
+    this.searchSubscription = this.searchService.searchResults$.subscribe(results => {
+      this.searchResults = results;
+    });
+    
+    // Subscribe to search query
+    this.searchQuerySubscription = this.searchService.searchQuery$.subscribe(query => {
+      this.currentSearchQuery = query;
+    });
+    
+    // Subscribe to has searched flag
+    this.hasSearchedSubscription = this.searchService.hasSearched$.subscribe(hasSearched => {
+      this.showSearchResults = hasSearched;
+    });
+  }
+  
+  ngOnDestroy(): void {
+    // Clean up subscriptions
+    this.searchSubscription.unsubscribe();
+    this.searchQuerySubscription.unsubscribe();
+    this.hasSearchedSubscription.unsubscribe();
   }
   
   loadDestinations(): void {
     this.destinationService.getDestinations().subscribe(destinations => {
       this.destinations = destinations;
       this.filteredDestinations = [...destinations];
+      
+      // Get featured destinations
+      this.featuredDestinations = destinations.filter(d => d.featured);
+      
+      // Get destinations by region
+      this.asiaDestinations = destinations.filter(d => d.region === 'Asia');
+      this.europeDestinations = destinations.filter(d => d.region === 'Europe');
+      
       this.extractRegions();
     });
   }

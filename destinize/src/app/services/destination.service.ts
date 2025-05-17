@@ -120,11 +120,25 @@ export class DestinationService {
   }
 
   searchDestinations(query: string): Observable<Destination[]> {
-    query = query.toLowerCase();
-    return of(this.destinations.filter(d => 
-      d.name.toLowerCase().includes(query) || 
-      d.location.toLowerCase().includes(query) ||
-      d.description.toLowerCase().includes(query)
-    ));
+    if (!query || query.trim() === '') {
+      return this.getDestinations();
+    }
+    
+    query = query.toLowerCase().trim();
+    
+    return of(this.destinations.filter(d => {
+      // Search by name, location, description
+      const basicMatch = d.name.toLowerCase().includes(query) || 
+                       d.location.toLowerCase().includes(query) ||
+                       d.description.toLowerCase().includes(query);
+      
+      // Search by region
+      const regionMatch = d.region.toLowerCase().includes(query);
+      
+      // Search by emoji tags
+      const tagMatch = d.tags.some(tag => tag.includes(query));
+      
+      return basicMatch || regionMatch || tagMatch;
+    }));
   }
 }

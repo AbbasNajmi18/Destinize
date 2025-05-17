@@ -1,19 +1,39 @@
 .destination-card {
   width: 100%;
   height: 100%;
-  border-radius: 12px;
+  border-radius: var(--card-border-radius);
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--card-shadow);
   background-color: white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  position: relative;
 }
 
 .destination-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-7px);
+  box-shadow: var(--hover-shadow);
+}
+
+.destination-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--card-border-radius);
+  opacity: 0;
+  box-shadow: var(--hover-shadow);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  z-index: -1;
+}
+
+.destination-card:hover::after {
+  opacity: 1;
 }
 
 .card-image {
@@ -38,52 +58,64 @@
   position: absolute;
   top: 12px;
   left: 12px;
-  background-color: var(--destinize-primary);
+  background: linear-gradient(135deg, var(--destinize-primary), var(--destinize-primary-dark));
   color: white;
-  padding: 4px 10px;
-  border-radius: 16px;
+  padding: 6px 12px;
+  border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
 }
 
 .price-tag {
   position: absolute;
   bottom: 12px;
   right: 12px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background: linear-gradient(135deg, rgba(34, 34, 59, 0.85), rgba(0, 0, 0, 0.9));
   color: white;
-  padding: 4px 10px;
-  border-radius: 16px;
+  padding: 6px 12px;
+  border-radius: 20px;
   font-size: 0.875rem;
   font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(5px);
+  letter-spacing: 0.5px;
 }
 
 .card-content {
-  padding: 16px;
+  padding: 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
+  background: linear-gradient(180deg, #ffffff 0%, #fcfcfc 100%);
 }
 
 .region-tag {
   display: inline-block;
-  background-color: var(--destinize-bg);
-  color: var(--destinize-primary);
-  padding: 4px 10px;
+  background: linear-gradient(135deg, var(--destinize-bg), var(--destinize-accent));
+  color: var(--destinize-primary-dark);
+  padding: 5px 12px;
   border-radius: 16px;
   font-size: 0.75rem;
-  font-weight: 500;
-  margin-bottom: 8px;
+  font-weight: 600;
+  margin-bottom: 10px;
   align-self: flex-start;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
 }
 
 .destination-name {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  margin: 0 0 8px 0;
-  color: #22223B;
+  margin: 0 0 10px 0;
+  color: var(--destinize-dark);
+  font-family: var(--heading-font);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .rating {
@@ -105,10 +137,10 @@
 }
 
 .destination-description {
-  font-size: 0.875rem;
-  color: #555;
-  margin-bottom: 12px;
-  line-height: 1.4;
+  font-size: 0.9rem;
+  color: var(--destinize-text-light);
+  margin-bottom: 14px;
+  line-height: 1.6;
   flex-grow: 1;
   /* Limit to 3 lines with ellipsis */
   display: -webkit-box;
@@ -117,6 +149,8 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: var(--body-font);
+  font-weight: 300;
 }
 
 .tag-list {
@@ -128,18 +162,23 @@
 
 .tag {
   font-size: 1.2rem;
-  background-color: var(--destinize-accent);
+  background: linear-gradient(135deg, var(--destinize-accent), var(--destinize-secondary));
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  color: var(--destinize-primary-dark);
 }
 
 .tag:hover {
-  transform: scale(1.1);
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background: linear-gradient(135deg, var(--destinize-secondary), var(--destinize-primary));
+  color: var(--destinize-dark);
 }
 
 @media (max-width: 768px) {
