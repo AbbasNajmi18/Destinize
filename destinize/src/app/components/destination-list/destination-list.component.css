@@ -1,0 +1,141 @@
+.destination-list-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Filters Section */
+.filters-section {
+  margin-bottom: 2rem;
+}
+
+.filters-section h2 {
+  font-size: 1.8rem;
+  color: #22223B;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.region-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-button {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #555;
+}
+
+.filter-button:hover {
+  background-color: var(--destinize-bg);
+  border-color: var(--destinize-primary);
+  color: var(--destinize-primary);
+}
+
+.filter-button.active {
+  background-color: var(--destinize-primary);
+  border-color: var(--destinize-primary);
+  color: white;
+  font-weight: 500;
+}
+
+/* Destinations Grid */
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.grid-item {
+  display: flex;
+  height: 100%;
+}
+
+/* Empty State */
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: var(--destinize-bg);
+  border-radius: 12px;
+  margin: 2rem 0;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  color: #22223B;
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.reset-button {
+  background-color: var(--destinize-primary);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.reset-button:hover {
+  background-color: #9bc989;
+  transform: translateY(-2px);
+}
+
+/* Responsive Layout */
+@media (max-width: 992px) {
+  .destinations-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .destinations-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  
+  .filters-section h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .destinations-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .region-filters {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .region-filters::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}

@@ -1,0 +1,39 @@
+<div class="destination-card">
+  <!-- Card Image -->
+  <div class="card-image">
+    <img [src]="destination.image" [alt]="destination.name">
+
+    <!-- Featured Badge -->
+    <div class="featured-badge" *ngIf="destination.featured">
+      Featured
+    </div>
+
+    <!-- Price Tag -->
+    <div class="price-tag" *ngIf="destination.price">
+      ${{ destination.price }}
+    </div>
+  </div>
+
+  <!-- Card Content -->
+  <div class="card-content">
+    <!-- Region Tag -->
+    <div class="region-tag">{{ destination.region }}</div>
+
+    <!-- Card Title -->
+    <h3 class="destination-name">{{ formattedLocation }}</h3>
+
+    <!-- Rating -->
+    <div class="rating" *ngIf="destination.rating">
+      <span class="rating-star">★</span>
+      <span class="rating-value">{{ destination.rating }}</span>
+    </div>
+
+    <!-- Card Description -->
+    <p class="destination-description">{{ destination.description }}</p>
+
+    <!-- Tag List -->
+    <div class="tag-list">
+      <span class="tag" *ngFor="let tag of destination.tags">{{ tag }}</span>
+    </div>
+  </div>
+</div>

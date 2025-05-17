@@ -1,0 +1,35 @@
+<section class="destination-list-container">
+  <!-- Filters Section -->
+  <div class="filters-section">
+    <!-- Region Filter -->
+    <div class="region-filters">
+      <button class="filter-button" [class.active]="selectedRegion === ''" (click)="clearFilter()">
+        All Regions
+      </button>
+      <button
+        *ngFor="let region of regions"
+        class="filter-button"
+        [class.active]="selectedRegion === region"
+        (click)="filterByRegion(region)">
+        {{ region }}
+      </button>
+    </div>
+
+    <!-- Add more filters here (e.g., by tags, price range, etc.) -->
+  </div>
+
+  <!-- Destinations Grid -->
+  <div class="destinations-grid">
+    <div class="grid-item" *ngFor="let destination of filteredDestinations">
+      <app-destination-card [destination]="destination"></app-destination-card>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="filteredDestinations.length === 0">
+      <div class="empty-icon">😔</div>
+      <h3>No destinations found</h3>
+      <p>Try adjusting your filters or explore other regions.</p>
+      <button class="reset-button" (click)="clearFilter()">Reset Filters</button>
+    </div>
+  </div>
+</section>

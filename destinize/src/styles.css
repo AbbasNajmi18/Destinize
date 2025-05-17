@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { 
+  height: 100%; 
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  box-sizing: border-box;
+}
+
+/* $destinize-primary: #B0DB9C;
+$destinize-secondary: #CAE8BD;
+$destinize-accent: #DDF6D2;
+$destinize-bg: #ECFAE5; */
+
+
+/* Colors */
+:root {
+  --destinize-primary: #B0DB9C;
+  --destinize-secondary: #CAE8BD;
+  --destinize-accent: #DDF6D2;
+  --destinize-bg: #ECFAE5;
+}
+
+/* Material Sidenav */
+.mat-sidenav {
+  background: var(--destinize-bg);
+  color: #22223B;
+}
