@@ -1,6 +1,14 @@
 <section class="destination-list-container">
-  <section class="discover-section">
+  <section class="search-results-section" *ngIf="showSearchResults">
     <div class="section-header">
+      <h2 class="section-title">Search International Destinations</h2>
+      <p class="section-subtitle" *ngIf="currentSearchQuery">
+        Showing results for {{ currentSearchQuery }}
+      </p>
+    </div>
+  </section>
+  <section class="discover-section">
+    <div class="section-header" *ngIf="!showSearchResults">
       <h2 class="section-title">Discover Places Outside India</h2>
       <p class="section-subtitle">Explore destinations outside India</p>
     </div>
