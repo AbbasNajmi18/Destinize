@@ -19,11 +19,17 @@
   <section class="destination-detail" *ngIf="destination && !loading && !error">
     <!-- Hero Section with Image and Basic Info -->
     <div class="hero-section">
-      <img [src]="destination.image" [alt]="destination.name" class="hero-image">
+      <img
+        [src]="destination.image"
+        [alt]="destination.name"
+        class="hero-image"
+      />
       <div class="overlay"></div>
       <div class="hero-content">
         <div class="destination-tags">
-          <span class="tag" *ngFor="let tag of destination.tags">{{ tag }}</span>
+          <span class="tag" *ngFor="let tag of destination.tags">{{
+            tag
+          }}</span>
         </div>
         <h1 class="destination-name">{{ destination.name }}</h1>
         <h2 class="destination-location">{{ destination.location }}</h2>
@@ -50,22 +56,35 @@
         <!-- Description -->
         <section class="section">
           <h3 class="section-title">About {{ destination.name }}</h3>
-          <p class="destination-description">{{ destination.fullDescription || destination.description }}</p>
+          <p class="destination-description">
+            {{ destination.fullDescription || destination.description }}
+          </p>
         </section>
 
         <!-- Attractions -->
-        <section class="section" *ngIf="destination.attractions && destination.attractions.length > 0">
+        <section
+          class="section"
+          *ngIf="destination.attractions && destination.attractions.length > 0"
+        >
           <h3 class="section-title">Top Attractions</h3>
           <ul class="attractions-list">
-            <li class="attraction-item" *ngFor="let attraction of destination.attractions">
-              <span class="attraction-icon" [style.backgroundImage]="'url(' + attraction.image + ')'"></span>
+            <li
+              class="attraction-item"
+              *ngFor="let attraction of destination.attractions"
+            >
+              <span
+                class="attraction-icon"
+                [style.backgroundImage]="'url(' + attraction.image + ')'"
+              ></span>
               <div class="attraction-content">
                 <h4>{{ attraction.name }}</h4>
                 <p>{{ attraction.description }}</p>
                 <div class="attraction-details">
                   <span class="rating">⭐ {{ attraction.rating }}</span>
                   <span class="duration">{{ attraction.visitDuration }}</span>
-                  <span class="fee" *ngIf="attraction.entryFee">{{ attraction.entryFee }}</span>
+                  <span class="fee" *ngIf="attraction.entryFee">{{
+                    attraction.entryFee
+                  }}</span>
                 </div>
               </div>
             </li>
@@ -81,8 +100,13 @@
               <h4>Spring</h4>
               <p>{{ destination.seasonalInfo.spring.description }}</p>
               <div class="season-details">
-                <span class="temp">{{ destination.seasonalInfo.spring.temperature }}</span><br>
-                <span class="crowd">Crowd: {{ destination.seasonalInfo.spring.crowdLevel }}</span>
+                <span class="temp">{{
+                  destination.seasonalInfo.spring.temperature
+                }}</span
+                ><br />
+                <span class="crowd"
+                  >Crowd: {{ destination.seasonalInfo.spring.crowdLevel }}</span
+                >
               </div>
             </div>
             <div class="season">
@@ -90,8 +114,13 @@
               <h4>Summer</h4>
               <p>{{ destination.seasonalInfo.summer.description }}</p>
               <div class="season-details">
-                <span class="temp">{{ destination.seasonalInfo.summer.temperature }}</span><br>
-                <span class="crowd">Crowd: {{ destination.seasonalInfo.summer.crowdLevel }}</span>
+                <span class="temp">{{
+                  destination.seasonalInfo.summer.temperature
+                }}</span
+                ><br />
+                <span class="crowd"
+                  >Crowd: {{ destination.seasonalInfo.summer.crowdLevel }}</span
+                >
               </div>
             </div>
             <div class="season">
@@ -99,8 +128,13 @@
               <h4>Fall</h4>
               <p>{{ destination.seasonalInfo.autumn.description }}</p>
               <div class="season-details">
-                <span class="temp">{{ destination.seasonalInfo.autumn.temperature }}</span><br>
-                <span class="crowd">Crowd: {{ destination.seasonalInfo.autumn.crowdLevel }}</span>
+                <span class="temp">{{
+                  destination.seasonalInfo.autumn.temperature
+                }}</span
+                ><br />
+                <span class="crowd"
+                  >Crowd: {{ destination.seasonalInfo.autumn.crowdLevel }}</span
+                >
               </div>
             </div>
             <div class="season">
@@ -108,8 +142,13 @@
               <h4>Winter</h4>
               <p>{{ destination.seasonalInfo.winter.description }}</p>
               <div class="season-details">
-                <span class="temp">{{ destination.seasonalInfo.winter.temperature }}</span><br>
-                <span class="crowd">Crowd: {{ destination.seasonalInfo.winter.crowdLevel }}</span>
+                <span class="temp">{{
+                  destination.seasonalInfo.winter.temperature
+                }}</span
+                ><br />
+                <span class="crowd"
+                  >Crowd: {{ destination.seasonalInfo.winter.crowdLevel }}</span
+                >
               </div>
             </div>
           </div>
@@ -172,7 +211,10 @@
         </section>
 
         <!-- Travel Tips -->
-        <section class="section" *ngIf="destination.travelTips && destination.travelTips.length > 0">
+        <section
+          class="section"
+          *ngIf="destination.travelTips && destination.travelTips.length > 0"
+        >
           <h3 class="section-title">Travel Tips</h3>
           <div class="tip-item" *ngFor="let tip of destination.travelTips">
             <span class="tip-category">{{ tip.category }}</span>
@@ -187,9 +229,21 @@
         <div class="sidebar-section">
           <h3 class="sidebar-title">Quick Facts</h3>
           <ul class="quick-facts">
-            <li><span class="fact-icon">💬</span> <span class="fact-label">Language:</span> {{ destination.language }}</li>
-            <li><span class="fact-icon">💱</span> <span class="fact-label">Currency:</span> {{ destination.currency }}</li>
-            <li><span class="fact-icon">⏰</span> <span class="fact-label">Time Zone:</span> {{ destination.timeZone }}</li>
+            <li>
+              <span class="fact-icon">💬</span>
+              <span class="fact-label">Language:</span>
+              {{ destination.language }}
+            </li>
+            <li>
+              <span class="fact-icon">💱</span>
+              <span class="fact-label">Currency:</span>
+              {{ destination.currency }}
+            </li>
+            <li>
+              <span class="fact-icon">⏰</span>
+              <span class="fact-label">Time Zone:</span>
+              {{ destination.timeZone }}
+            </li>
           </ul>
         </div>
 
@@ -197,17 +251,22 @@
         <div class="sidebar-section" *ngIf="destination.geography">
           <h3 class="sidebar-title">Geography</h3>
           <div class="map-placeholder">
-            <span class="map-icon">📍</span> {{ destination.location }}, {{ destination.region }}
+            <span class="map-icon">📍</span> {{ destination.location }},
+            {{ destination.region }}
           </div>
           <p class="terrain">{{ destination.geography.terrain }}</p>
           <div class="geography-details">
             <h4>Notable Landmarks</h4>
             <ul class="landmark-list">
-              <li *ngFor="let landmark of destination.geography.landmarks">{{ landmark }}</li>
+              <li *ngFor="let landmark of destination.geography.landmarks">
+                {{ landmark }}
+              </li>
             </ul>
             <h4>Nearby Areas</h4>
             <ul class="nearby-list">
-              <li *ngFor="let area of destination.geography.surroundingAreas">{{ area }}</li>
+              <li *ngFor="let area of destination.geography.surroundingAreas">
+                {{ area }}
+              </li>
             </ul>
           </div>
         </div>
@@ -216,14 +275,24 @@
 
     <!-- Related Destinations -->
     <section class="related-destinations">
-      <h3 class="section-title">More Destinations in {{ destination.region }}</h3>
+      <h3 class="section-title">
+        More Destinations in {{ destination.region }}
+      </h3>
       <div class="related-grid">
         <div class="related-item" *ngFor="let related of relatedDestinations">
-          <img [src]="related.image" [alt]="related.name" class="related-image">
+          <img
+            [src]="related.image"
+            [alt]="related.name"
+            class="related-image"
+          />
           <div class="related-content">
             <h4 class="related-name">{{ related.name }}</h4>
             <p class="related-location">{{ related.location }}</p>
-            <button class="related-button"><a [routerLink]="['/destinations', related.id]" target="_blank">Explore</a></button>
+            <button class="related-button">
+              <a [routerLink]="['/destinations', related.id]" target="_blank"
+                >Explore</a
+              >
+            </button>
           </div>
         </div>
       </div>

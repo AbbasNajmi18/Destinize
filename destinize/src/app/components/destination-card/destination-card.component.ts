@@ -6,17 +6,17 @@ import { Destination } from '../../models/destination';
   selector: 'app-destination-card',
   standalone: false,
   templateUrl: './destination-card.component.html',
-  styleUrls: ['./destination-card.component.css']
+  styleUrls: ['./destination-card.component.css'],
 })
 export class DestinationCardComponent {
   @Input() destination!: Destination;
-  
+
   constructor(private router: Router) {}
-  
+
   get formattedLocation(): string {
     return `${this.destination.name}, ${this.destination.location}`;
   }
-  
+
   navigateToDetail(): void {
     this.router.navigate(['/destinations', this.destination.id]);
   }

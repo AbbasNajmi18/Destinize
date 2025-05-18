@@ -8,10 +8,10 @@ import { SearchService } from '../../services/search.service';
   selector: 'app-national',
   standalone: false,
   templateUrl: './national.component.html',
-  styleUrl: './national.component.css'
+  styleUrl: './national.component.css',
 })
 export class NationalComponent {
- destinations: Destination[] = [];
+  destinations: Destination[] = [];
   regions: string[] = [];
   filteredDestinations: Destination[] = [];
   featuredDestinations: Destination[] = [];
@@ -31,7 +31,7 @@ export class NationalComponent {
 
   constructor(
     private destinationService: DestinationService,
-    public searchService: SearchService
+    public searchService: SearchService,
   ) {}
 
   ngOnInit(): void {
@@ -41,19 +41,25 @@ export class NationalComponent {
     this.selectedRegion = 'Asia';
 
     // Subscribe to search results
-    this.searchSubscription = this.searchService.searchResults$.subscribe(results => {
-      this.searchResults = results;
-    });
+    this.searchSubscription = this.searchService.searchResults$.subscribe(
+      (results) => {
+        this.searchResults = results;
+      },
+    );
 
     // Subscribe to search query
-    this.searchQuerySubscription = this.searchService.searchQuery$.subscribe(query => {
-      this.currentSearchQuery = query;
-    });
+    this.searchQuerySubscription = this.searchService.searchQuery$.subscribe(
+      (query) => {
+        this.currentSearchQuery = query;
+      },
+    );
 
     // Subscribe to has searched flag
-    this.hasSearchedSubscription = this.searchService.hasSearched$.subscribe(hasSearched => {
-      this.showSearchResults = hasSearched;
-    });
+    this.hasSearchedSubscription = this.searchService.hasSearched$.subscribe(
+      (hasSearched) => {
+        this.showSearchResults = hasSearched;
+      },
+    );
   }
 
   ngOnDestroy(): void {
@@ -64,12 +70,14 @@ export class NationalComponent {
   }
 
   loadDestinations(): void {
-    this.destinationService.getDestinations().subscribe(destinations => {
+    this.destinationService.getDestinations().subscribe((destinations) => {
       this.destinations = destinations;
-      this.filteredDestinations = this.destinations.filter(d => d.location === 'India');
+      this.filteredDestinations = this.destinations.filter(
+        (d) => d.location === 'India',
+      );
 
       // Get featured destinations
-      this.featuredDestinations = destinations.filter(d => d.featured);
+      this.featuredDestinations = destinations.filter((d) => d.featured);
     });
   }
 }

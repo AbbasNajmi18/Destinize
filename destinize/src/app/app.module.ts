@@ -34,7 +34,7 @@ import { InternationalComponent } from './pages/international/international.comp
     HomeComponent,
     DestinationsComponent,
     NationalComponent,
-    InternationalComponent
+    InternationalComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,9 +45,9 @@ import { InternationalComponent } from './pages/international/international.comp
     MatIconModule,
     MatButtonModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

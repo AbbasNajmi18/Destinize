@@ -1,5 +1,4 @@
 <section class="destination-list-container">
-
   <section class="discover-section">
     <div class="section-header">
       <h2 class="section-title">Discover Places Outside India</h2>
@@ -9,7 +8,10 @@
     <!-- Filtered Destinations Grid -->
     <div class="destinations-grid">
       <div class="grid-item" *ngFor="let destination of filteredDestinations">
-        <app-destination-card [destination]="destination"></app-destination-card>
+        <app-destination-card
+          [destination]="destination"
+        ></app-destination-card>
       </div>
     </div>
   </section>
+</section>

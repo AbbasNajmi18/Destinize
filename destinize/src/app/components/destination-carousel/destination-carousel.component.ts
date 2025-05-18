@@ -19,7 +19,7 @@ export class DestinationCarouselComponent implements OnInit {
 
   constructor(
     private destinationService: DestinationService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -32,10 +32,12 @@ export class DestinationCarouselComponent implements OnInit {
   }
 
   loadDestinations(): void {
-    this.destinationService.getDestinations().subscribe(destinations => {
+    this.destinationService.getDestinations().subscribe((destinations) => {
       // Get featured destinations or destinations with high ratings
       this.destinations = destinations
-        .filter(d => d.featured || (d.rating !== undefined && d.rating >= 4.5))
+        .filter(
+          (d) => d.featured || (d.rating !== undefined && d.rating >= 4.5),
+        )
         .sort((a, b) => (b.rating || 0) - (a.rating || 0))
         .slice(0, 8); // Limit to 8 top destinations
 
@@ -55,7 +57,10 @@ export class DestinationCarouselComponent implements OnInit {
 
     // Ensure current index doesn't exceed bounds
     if (this.currentIndex > this.totalDestinations - this.itemsToShow) {
-      this.currentIndex = Math.max(0, this.totalDestinations - this.itemsToShow);
+      this.currentIndex = Math.max(
+        0,
+        this.totalDestinations - this.itemsToShow,
+      );
     }
   }
 
@@ -66,14 +71,14 @@ export class DestinationCarouselComponent implements OnInit {
   nextSlide(): void {
     this.currentIndex = Math.min(
       this.totalDestinations - 1, // Change to total - 1 to access all slides
-      this.currentIndex + 1
+      this.currentIndex + 1,
     );
   }
 
   goToSlide(index: number): void {
     this.currentIndex = Math.min(
       Math.max(0, index),
-      this.totalDestinations - 1 // Change to total - 1 to access all slides
+      this.totalDestinations - 1, // Change to total - 1 to access all slides
     );
   }
 
@@ -97,7 +102,10 @@ export class DestinationCarouselComponent implements OnInit {
   }
 
   getVisibleDestinations(): Destination[] {
-    return this.destinations.slice(this.currentIndex, this.currentIndex + this.itemsToShow);
+    return this.destinations.slice(
+      this.currentIndex,
+      this.currentIndex + this.itemsToShow,
+    );
   }
 
   viewDestinationDetails(destinationId: number): void {

@@ -1,12 +1,14 @@
-<div class="destination-card" (click)="navigateToDetail()" [style.cursor]="'pointer'">
+<div
+  class="destination-card"
+  (click)="navigateToDetail()"
+  [style.cursor]="'pointer'"
+>
   <!-- Card Image -->
   <div class="card-image">
-    <img [src]="destination.image" [alt]="destination.name">
+    <img [src]="destination.image" [alt]="destination.name" />
 
     <!-- Featured Badge -->
-    <div class="featured-badge" *ngIf="destination.featured">
-      Featured
-    </div>
+    <div class="featured-badge" *ngIf="destination.featured">Featured</div>
 
     <!-- Price Tag -->
     <div class="price-tag" *ngIf="destination.price">

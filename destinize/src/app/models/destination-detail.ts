@@ -26,7 +26,7 @@ export interface Attraction {
   image: string;
   rating: number;
   visitDuration: string; // e.g., "2-3 hours"
-  entryFee?: string;     // e.g., "$15" or "Free"
+  entryFee?: string; // e.g., "$15" or "Free"
 }
 
 export interface SeasonalInfo {

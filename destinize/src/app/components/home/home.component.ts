@@ -6,7 +6,7 @@ import { SearchService } from '../../services/search.service';
   selector: 'app-home',
   standalone: false,
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
 export class HomeComponent {
   isSearchActive = false;
@@ -16,9 +16,11 @@ export class HomeComponent {
 
   ngOnInit(): void {
     // Subscribe to search state
-    this.searchSubscription = this.searchService.hasSearched$.subscribe(hasSearched => {
-      this.isSearchActive = hasSearched;
-    });
+    this.searchSubscription = this.searchService.hasSearched$.subscribe(
+      (hasSearched) => {
+        this.isSearchActive = hasSearched;
+      },
+    );
   }
 
   ngOnDestroy(): void {

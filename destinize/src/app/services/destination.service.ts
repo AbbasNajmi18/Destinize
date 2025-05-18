@@ -4,28 +4,28 @@ import { Destination } from '../models/destination';
 import { Destinations } from '../mock-data/destinations';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DestinationService {
   private destinations: Destination[] = Destinations;
 
-  constructor() { }
+  constructor() {}
 
   getDestinations(): Observable<Destination[]> {
     return of(this.destinations);
   }
 
   getDestinationById(id: number): Observable<Destination | undefined> {
-    const destination = this.destinations.find(d => d.id === id);
+    const destination = this.destinations.find((d) => d.id === id);
     return of(destination);
   }
 
   getDestinationsByRegion(region: string): Observable<Destination[]> {
-    return of(this.destinations.filter(d => d.region === region));
+    return of(this.destinations.filter((d) => d.region === region));
   }
 
   getFeaturedDestinations(): Observable<Destination[]> {
-    return of(this.destinations.filter(d => d.featured));
+    return of(this.destinations.filter((d) => d.featured));
   }
 
   searchDestinations(query: string): Observable<Destination[]> {
@@ -35,19 +35,22 @@ export class DestinationService {
 
     query = query.toLowerCase().trim();
 
-    return of(this.destinations.filter(d => {
-      // Search by name, location, description
-      const basicMatch = d.name.toLowerCase().includes(query) ||
-                       d.location.toLowerCase().includes(query) ||
-                       d.description.toLowerCase().includes(query);
+    return of(
+      this.destinations.filter((d) => {
+        // Search by name, location, description
+        const basicMatch =
+          d.name.toLowerCase().includes(query) ||
+          d.location.toLowerCase().includes(query) ||
+          d.description.toLowerCase().includes(query);
 
-      // Search by region
-      const regionMatch = d.region.toLowerCase().includes(query);
+        // Search by region
+        const regionMatch = d.region.toLowerCase().includes(query);
 
-      // Search by emoji tags
-      const tagMatch = d.tags.some(tag => tag.includes(query));
+        // Search by emoji tags
+        const tagMatch = d.tags.some((tag) => tag.includes(query));
 
-      return basicMatch || regionMatch || tagMatch;
-    }));
+        return basicMatch || regionMatch || tagMatch;
+      }),
+    );
   }
 }

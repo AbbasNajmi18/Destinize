@@ -8,9 +8,8 @@ describe('InternationalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InternationalComponent]
-    })
-    .compileComponents();
+      declarations: [InternationalComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(InternationalComponent);
     component = fixture.componentInstance;

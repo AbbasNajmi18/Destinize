@@ -11,7 +11,7 @@ import { filter } from 'rxjs/operators';
   selector: 'app-header',
   standalone: false,
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   searchControl = new FormControl('');
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     'Search 🏙️',
     'Search 🏛️',
     'Search 🌅',
-    'Search 🍷'
+    'Search 🍷',
   ];
   private placeholderInterval: any;
   private searchSubscription: Subscription = new Subscription();
@@ -39,18 +39,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private destinationService: DestinationService,
     private searchService: SearchService,
     private regionService: RegionService,
-    private router: Router
+    private router: Router,
   ) {
     // Track route changes to adjust search behavior
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: any) => {
-      this.currentRoute = event.url;
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.currentRoute = event.url;
 
-      // Update the national page flag in the region service
-      const isNationalPage = this.currentRoute === '/national';
-      this.regionService.setIsNationalPage(isNationalPage);
-    });
+        // Update the national page flag in the region service
+        const isNationalPage = this.currentRoute === '/national';
+        this.regionService.setIsNationalPage(isNationalPage);
+      });
   }
 
   ngOnInit(): void {
@@ -68,22 +68,27 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.regionService.setIsNationalPage(isNationalPage);
 
     // Subscribe to selected region changes
-    this.regionSubscription = this.regionService.selectedRegion$.subscribe(region => {
-      this.selectedRegion = region;
-    });
+    this.regionSubscription = this.regionService.selectedRegion$.subscribe(
+      (region) => {
+        this.selectedRegion = region;
+      },
+    );
     // Subscribe to changes in the search input
     this.searchSubscription = this.searchControl.valueChanges
       .pipe(
         debounceTime(300), // Wait for 300ms pause in events
-        distinctUntilChanged() // Only emit when the current value is different from the last
+        distinctUntilChanged(), // Only emit when the current value is different from the last
       )
-      .subscribe(query => {
+      .subscribe((query) => {
         // If search is empty, clear the search state
         if (!query || query.trim() === '') {
           this.searchService.clearSearch();
 
           // If we're on the destinations page and there was a previous page, go back to it
-          if (this.currentRoute === '/destinations' && this.searchService.getPreviousRoute() !== '/destinations') {
+          if (
+            this.currentRoute === '/destinations' &&
+            this.searchService.getPreviousRoute() !== '/destinations'
+          ) {
             this.router.navigate([this.searchService.getPreviousRoute()]);
           }
           return;
@@ -93,16 +98,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.searchService.updateSearchQuery(query);
 
         // Perform the search and update results
-        this.destinationService.searchDestinations(query).subscribe(results => {
-          // If not on the destinations page, save current route and navigate to destinations
-          if (this.currentRoute !== '/destinations') {
-            // Save the current route before navigating away
-            this.searchService.setPreviousRoute(this.currentRoute);
-            this.router.navigate(['/destinations']);
-          }
+        this.destinationService
+          .searchDestinations(query)
+          .subscribe((results) => {
+            // If not on the destinations page, save current route and navigate to destinations
+            if (this.currentRoute !== '/destinations') {
+              // Save the current route before navigating away
+              this.searchService.setPreviousRoute(this.currentRoute);
+              this.router.navigate(['/destinations']);
+            }
 
-          this.searchService.updateSearchResults(results);
-        });
+            this.searchService.updateSearchResults(results);
+          });
       });
   }
 
@@ -110,9 +117,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * Load all available regions from destinations
    */
   loadRegions(): void {
-    this.destinationService.getDestinations().subscribe(destinations => {
+    this.destinationService.getDestinations().subscribe((destinations) => {
       const regionSet = new Set<string>();
-      destinations.forEach(destination => {
+      destinations.forEach((destination) => {
         regionSet.add(destination.region);
       });
       this.regions = Array.from(regionSet);
@@ -142,16 +149,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     // Use the search service to filter by region
-    this.destinationService.getDestinationsByRegion(region).subscribe(results => {
-      this.searchService.updateSearchQuery(`Region: ${region}`);
-      this.searchService.updateSearchResults(results);
+    this.destinationService
+      .getDestinationsByRegion(region)
+      .subscribe((results) => {
+        this.searchService.updateSearchQuery(`Region: ${region}`);
+        this.searchService.updateSearchResults(results);
 
-      // Stay on the current page if it's international, otherwise navigate to destinations
-      if (this.currentRoute !== '/international') {
-        // Only navigate to destinations if not on the international page
-        this.router.navigate(['/destinations']);
-      }
-    });
+        // Stay on the current page if it's international, otherwise navigate to destinations
+        if (this.currentRoute !== '/international') {
+          // Only navigate to destinations if not on the international page
+          this.router.navigate(['/destinations']);
+        }
+      });
   }
 
   /**
@@ -195,7 +204,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.searchService.updateSearchQuery(query);
 
     // Perform the search and update results
-    this.destinationService.searchDestinations(query).subscribe(results => {
+    this.destinationService.searchDestinations(query).subscribe((results) => {
       // Save the current route before navigating away
       this.searchService.setPreviousRoute(this.currentRoute);
       // this.router.navigate(['/destinations']);

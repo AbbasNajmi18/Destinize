@@ -6,14 +6,14 @@ import { DestinationService } from '../../services/destination.service';
   selector: 'app-hero-section',
   standalone: false,
   templateUrl: './hero-section.component.html',
-  styleUrls: ['./hero-section.component.css']
+  styleUrls: ['./hero-section.component.css'],
 })
 export class HeroSectionComponent {
   searchControl = new FormControl('');
   backgroundImages = [
     'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1200&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=1200&auto=format&fit=crop',
-    'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1200&auto=format&fit=crop'
+    'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1200&auto=format&fit=crop',
   ];
   currentBgIndex = 0;
   currentBackground = this.backgroundImages[0];
@@ -24,7 +24,8 @@ export class HeroSectionComponent {
 
   rotateBackground(): void {
     setInterval(() => {
-      this.currentBgIndex = (this.currentBgIndex + 1) % this.backgroundImages.length;
+      this.currentBgIndex =
+        (this.currentBgIndex + 1) % this.backgroundImages.length;
       this.currentBackground = this.backgroundImages[this.currentBgIndex];
     }, 5000);
   }

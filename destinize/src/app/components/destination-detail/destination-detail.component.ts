@@ -9,7 +9,7 @@ import { DestinationDetailService } from '../../services/destination-detail.serv
   selector: 'app-destination-detail',
   standalone: false,
   templateUrl: './destination-detail.component.html',
-  styleUrls: ['./destination-detail.component.css']
+  styleUrls: ['./destination-detail.component.css'],
 })
 export class DestinationDetailComponent implements OnInit {
   destination: DestinationDetail | undefined;
@@ -23,11 +23,11 @@ export class DestinationDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private destinationService: DestinationService,
-    private destinationDetailService: DestinationDetailService
+    private destinationDetailService: DestinationDetailService,
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (id) {
         this.loadDestination(+id); // Convert to number with +
@@ -40,7 +40,7 @@ export class DestinationDetailComponent implements OnInit {
 
   loadDestination(id: number): void {
     this.destinationDetailService.getDestinationDetail(id).subscribe(
-      destination => {
+      (destination) => {
         this.destination = destination;
         if (destination) {
           this.loadRelatedDestinations(destination.region);
@@ -49,23 +49,23 @@ export class DestinationDetailComponent implements OnInit {
         }
         this.loading = false;
       },
-      error => {
+      (error) => {
         console.error('Error loading destination:', error);
         this.error = true;
         this.loading = false;
-      }
+      },
     );
   }
 
   loadRelatedDestinations(region: string): void {
-    this.destinationService.getDestinationsByRegion(region).subscribe(
-      destinations => {
+    this.destinationService
+      .getDestinationsByRegion(region)
+      .subscribe((destinations) => {
         // Filter out the current destination and limit to 4 related destinations
         this.relatedDestinations = destinations
-          .filter(d => d.id !== this.destination?.id)
+          .filter((d) => d.id !== this.destination?.id)
           .slice(0, 4);
-      }
-    );
+      });
   }
 
   setActiveTab(tab: string): void {
@@ -74,13 +74,16 @@ export class DestinationDetailComponent implements OnInit {
 
   nextSlide(): void {
     if (this.destination?.gallery) {
-      this.currentSlideIndex = (this.currentSlideIndex + 1) % this.destination.gallery.length;
+      this.currentSlideIndex =
+        (this.currentSlideIndex + 1) % this.destination.gallery.length;
     }
   }
 
   prevSlide(): void {
     if (this.destination?.gallery) {
-      this.currentSlideIndex = (this.currentSlideIndex - 1 + this.destination.gallery.length) % this.destination.gallery.length;
+      this.currentSlideIndex =
+        (this.currentSlideIndex - 1 + this.destination.gallery.length) %
+        this.destination.gallery.length;
     }
   }
 

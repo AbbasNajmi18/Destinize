@@ -8,10 +8,10 @@ import { SearchService } from '../../services/search.service';
   selector: 'app-destinations',
   standalone: false,
   templateUrl: './destinations.component.html',
-  styleUrl: './destinations.component.css'
+  styleUrl: './destinations.component.css',
 })
 export class DestinationsComponent {
- destinations: Destination[] = [];
+  destinations: Destination[] = [];
   regions: string[] = [];
   filteredDestinations: Destination[] = [];
   featuredDestinations: Destination[] = [];
@@ -31,26 +31,32 @@ export class DestinationsComponent {
 
   constructor(
     private destinationService: DestinationService,
-    public searchService: SearchService
+    public searchService: SearchService,
   ) {}
 
   ngOnInit(): void {
     this.loadDestinations();
 
     // Subscribe to search results
-    this.searchSubscription = this.searchService.searchResults$.subscribe(results => {
-      this.searchResults = results;
-    });
+    this.searchSubscription = this.searchService.searchResults$.subscribe(
+      (results) => {
+        this.searchResults = results;
+      },
+    );
 
     // Subscribe to search query
-    this.searchQuerySubscription = this.searchService.searchQuery$.subscribe(query => {
-      this.currentSearchQuery = query;
-    });
+    this.searchQuerySubscription = this.searchService.searchQuery$.subscribe(
+      (query) => {
+        this.currentSearchQuery = query;
+      },
+    );
 
     // Subscribe to has searched flag
-    this.hasSearchedSubscription = this.searchService.hasSearched$.subscribe(hasSearched => {
-      this.showSearchResults = hasSearched;
-    });
+    this.hasSearchedSubscription = this.searchService.hasSearched$.subscribe(
+      (hasSearched) => {
+        this.showSearchResults = hasSearched;
+      },
+    );
   }
 
   ngOnDestroy(): void {
@@ -61,16 +67,18 @@ export class DestinationsComponent {
   }
 
   loadDestinations(): void {
-    this.destinationService.getDestinations().subscribe(destinations => {
+    this.destinationService.getDestinations().subscribe((destinations) => {
       this.destinations = destinations;
       this.filteredDestinations = [...destinations];
 
       // Get featured destinations
-      this.featuredDestinations = destinations.filter(d => d.featured);
+      this.featuredDestinations = destinations.filter((d) => d.featured);
 
       // Get destinations by region
-      this.asiaDestinations = destinations.filter(d => d.region === 'Asia');
-      this.europeDestinations = destinations.filter(d => d.region === 'Europe');
+      this.asiaDestinations = destinations.filter((d) => d.region === 'Asia');
+      this.europeDestinations = destinations.filter(
+        (d) => d.region === 'Europe',
+      );
 
       this.extractRegions();
     });
@@ -78,7 +86,7 @@ export class DestinationsComponent {
 
   extractRegions(): void {
     const regionSet = new Set<string>();
-    this.destinations.forEach(destination => {
+    this.destinations.forEach((destination) => {
       regionSet.add(destination.region);
     });
     this.regions = Array.from(regionSet);
@@ -90,7 +98,9 @@ export class DestinationsComponent {
     if (region === '') {
       this.filteredDestinations = [...this.destinations];
     } else {
-      this.filteredDestinations = this.destinations.filter(d => d.region === region);
+      this.filteredDestinations = this.destinations.filter(
+        (d) => d.region === region,
+      );
     }
   }
 
