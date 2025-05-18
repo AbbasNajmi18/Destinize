@@ -17,14 +17,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
   searchControl = new FormControl('');
   regions: string[] = [];
   selectedRegion: string = ''; // Property to track selected region
-  currentPlaceholder = 'Search destinations...';
+  currentPlaceholder = 'Search destinations by region/emojis';
   placeholders = [
-    'Search destinations by region/emojis',
     'Search India',
     'Search Greece',
+    'Search Europe',
     'Search 🏖️',
     'Search 🌴',
-    'Search Europe'
+    'Search 🏙️',
+    'Search 🏛️',
+    'Search 🌅',
+    'Search 🍷'
   ];
   private placeholderInterval: any;
   private searchSubscription: Subscription = new Subscription();
@@ -200,18 +203,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.searchService.updateSearchResults(results);
     });
   }
-  
+
   // Reset all filters and search state when clicking on the Destinize logo
   resetAllFilters(): void {
     // Clear search input
     this.searchControl.setValue('');
-    
+
     // Clear search state
     this.searchService.clearSearch();
-    
+
     // Reset region selection
     this.regionService.updateSelectedRegion('');
-    
+
     // Navigate to home page
     this.router.navigate(['/']);
   }
