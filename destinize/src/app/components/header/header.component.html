@@ -12,13 +12,20 @@
     <form (submit)="onSearchSubmit($event)" class="search-form">
       <div class="search-field">
         <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Search destinations by region/emojis" [formControl]="searchControl">
+        <input type="text" [placeholder]="currentPlaceholder" [formControl]="searchControl">
       </div>
     </form>
   </div>
 
-  <!-- Navigation Links -->
+  <!-- Navigation Links with Region Dropdown -->
   <div class="nav-links">
+    <!-- Regions Dropdown -->
+    <div class="region-selector">
+      <select (change)="filterByRegion($event)" class="region-dropdown">
+        <option value="">All Regions</option>
+        <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
+      </select>
+    </div>
     <button>Destinations</button>
     <button>Deals</button>
     <button>Regions</button>

@@ -12,6 +12,17 @@ import { SearchService } from '../../services/search.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   searchControl = new FormControl('');
+  regions: string[] = [];
+  currentPlaceholder = 'Search destinations...';
+  placeholders = [
+    'Search destinations by region/emojis',
+    'Search India',
+    'Search Greece',
+    'Search 🏖️',
+    'Search 🌴',
+    'Search Europe'
+  ];
+  private placeholderInterval: any;
   private searchSubscription: Subscription = new Subscription();
 
   constructor(
@@ -20,6 +31,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // Load regions
+    this.loadRegions();
+
+    // Start rotating placeholders
+    this.startPlaceholderRotation();
+
     // Subscribe to changes in the search input
     this.searchSubscription = this.searchControl.valueChanges
       .pipe(
@@ -32,10 +49,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.searchService.clearSearch();
           return;
         }
-        
+
         // Update the search query in the service
         this.searchService.updateSearchQuery(query);
-        
+
         // Perform the search and update results
         this.destinationService.searchDestinations(query).subscribe(results => {
           this.searchService.updateSearchResults(results);
@@ -43,10 +60,60 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Load all available regions from destinations
+   */
+  loadRegions(): void {
+    this.destinationService.getDestinations().subscribe(destinations => {
+      const regionSet = new Set<string>();
+      destinations.forEach(destination => {
+        regionSet.add(destination.region);
+      });
+      this.regions = Array.from(regionSet);
+      this.regions.sort(); // Sort regions alphabetically
+    });
+  }
+
+  /**
+   * Filter destinations by selected region
+   */
+  filterByRegion(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    const region = select.value;
+
+    if (!region) {
+      // If "All Regions" is selected, clear the search
+      this.searchService.clearSearch();
+      return;
+    }
+
+    // Use the search service to filter by region
+    this.destinationService.getDestinationsByRegion(region).subscribe(results => {
+      this.searchService.updateSearchQuery(`Region: ${region}`);
+      this.searchService.updateSearchResults(results);
+    });
+  }
+
+  /**
+   * Start rotating the placeholder text every 2 seconds
+   */
+  startPlaceholderRotation(): void {
+    let index = 0;
+    this.placeholderInterval = setInterval(() => {
+      index = (index + 1) % this.placeholders.length;
+      this.currentPlaceholder = this.placeholders[index];
+    }, 2000); // Change every 2 seconds
+  }
+
   ngOnDestroy(): void {
     // Clean up subscriptions
     if (this.searchSubscription) {
       this.searchSubscription.unsubscribe();
+    }
+
+    // Clear placeholder rotation interval
+    if (this.placeholderInterval) {
+      clearInterval(this.placeholderInterval);
     }
   }
 

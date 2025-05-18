@@ -23,7 +23,6 @@
   padding: 0;
   z-index: 10;
   transform: translateY(-50%);
-  /* Removed pointer-events: none which was preventing clicks */
 }
 
 .nav-arrow {
@@ -268,8 +267,6 @@
   letter-spacing: -1px;
   max-width: 700px;
 }
-
-/* Location icon removed */
 
 .destination-description {
   font-size: 1.3rem;
