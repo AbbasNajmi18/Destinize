@@ -1,0 +1,63 @@
+<section class="destination-list-container">
+  <!-- Search Results Section -->
+  <section class="search-results-section" *ngIf="showSearchResults">
+    <div class="section-header">
+      <h2 class="section-title">Search Results</h2>
+      <p class="section-subtitle" *ngIf="currentSearchQuery">
+        Showing results for "{{ currentSearchQuery }}"
+      </p>
+    </div>
+
+    <div class="destinations-grid">
+      <div class="grid-item" *ngFor="let destination of searchResults">
+        <app-destination-card [destination]="destination"></app-destination-card>
+      </div>
+
+      <!-- Empty Search Results State -->
+      <div class="empty-state" *ngIf="searchResults.length === 0 && currentSearchQuery">
+        <div class="empty-icon">🔍</div>
+        <h3>No results found</h3>
+        <p>Try searching with different region names or emoji tags.</p>
+      </div>
+    </div>
+  </section>
+  <!-- Hide regular content when showing search results -->
+  <ng-container *ngIf="!showSearchResults">
+
+  <!-- Filters Section -->
+  <section class="discover-section">
+    <div class="section-header">
+      <h2 class="section-title">Discover Places</h2>
+      <p class="section-subtitle">Explore destinations by region or interest</p>
+    </div>
+
+    <div class="filters-section">
+      <div class="region-filters">
+        <button class="filter-button" [class.active]="selectedRegion === ''" (click)="clearFilter()">
+          All Regions
+        </button>
+        <button
+          *ngFor="let region of regions"
+          class="filter-button"
+          [class.active]="selectedRegion === region"
+          (click)="filterByRegion(region)">
+          {{ region }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Filtered Destinations Grid -->
+    <div class="destinations-grid">
+      <div class="grid-item" *ngFor="let destination of filteredDestinations">
+        <app-destination-card [destination]="destination"></app-destination-card>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="filteredDestinations.length === 0">
+        <div class="empty-icon">😔</div>
+        <h3>No destinations found</h3>
+        <p>Try adjusting your filters or explore other regions.</p>
+        <button class="reset-button" (click)="clearFilter()">Reset Filters</button>
+      </div>
+    </div>
+  </section>

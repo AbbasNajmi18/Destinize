@@ -1,9 +1,9 @@
 <div class="header-toolbar">
   <!-- Logo Section -->
-  <div class="logo-container">
-    <a class="logo">
+  <div (click)="resetAllFilters()" class="logo-container">
+    <a class="logo" >
       <span class="logo-icon">🌍</span>
-      <span routerLink="/" class="logo-text">Destinize</span>
+      <span class="logo-text">Destinize</span>
     </a>
   </div>
 
@@ -11,15 +11,14 @@
   <div class="nav-links">
     <!-- Regions Dropdown -->
     <div class="region-selector">
-      <select (change)="filterByRegion($event)" class="region-dropdown">
-        <option value="">All Regions</option>
-        <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
+      <select (change)="filterByRegion($event)" class="region-dropdown" [value]="selectedRegion">
+        <option value="" [selected]="selectedRegion === ''">All Regions</option>
+        <option *ngFor="let region of regions" [value]="region" [selected]="selectedRegion === region">{{ region }}</option>
       </select>
     </div>
-    <button>Destinations</button>
-    <button>National</button>
-    <button>International</button>
-    <button>Regions</button>
+    <button routerLink="/destinations">Destinations</button>
+    <button routerLink="/national">National</button>
+    <button routerLink="/international">International</button>
   </div>
 
   <!-- Search Bar -->

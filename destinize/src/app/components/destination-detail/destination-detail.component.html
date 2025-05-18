@@ -223,7 +223,7 @@
           <div class="related-content">
             <h4 class="related-name">{{ related.name }}</h4>
             <p class="related-location">{{ related.location }}</p>
-            <button class="related-button" [routerLink]="['/destinations', related.id]">Explore</button>
+            <button class="related-button"><a [routerLink]="['/destinations', related.id]" target="_blank">Explore</a></button>
           </div>
         </div>
       </div>

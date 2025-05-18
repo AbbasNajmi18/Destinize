@@ -18,14 +18,14 @@ export class DestinationDetailComponent implements OnInit {
   error = false;
   activeTab = 'overview';
   currentSlideIndex = 0;
-  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private destinationService: DestinationService,
     private destinationDetailService: DestinationDetailService
   ) {}
-  
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
@@ -37,7 +37,7 @@ export class DestinationDetailComponent implements OnInit {
       }
     });
   }
-  
+
   loadDestination(id: number): void {
     this.destinationDetailService.getDestinationDetail(id).subscribe(
       destination => {
@@ -56,7 +56,7 @@ export class DestinationDetailComponent implements OnInit {
       }
     );
   }
-  
+
   loadRelatedDestinations(region: string): void {
     this.destinationService.getDestinationsByRegion(region).subscribe(
       destinations => {
@@ -67,7 +67,7 @@ export class DestinationDetailComponent implements OnInit {
       }
     );
   }
-  
+
   setActiveTab(tab: string): void {
     this.activeTab = tab;
   }

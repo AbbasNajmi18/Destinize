@@ -21,6 +21,10 @@ export class SearchService {
   // Flag to indicate if search has been performed
   private hasSearchedSubject = new BehaviorSubject<boolean>(false);
   public hasSearched$: Observable<boolean> = this.hasSearchedSubject.asObservable();
+  
+  // Track the previous route before searching
+  private previousRouteSubject = new BehaviorSubject<string>('/');
+  public previousRoute$: Observable<string> = this.previousRouteSubject.asObservable();
 
   constructor() { }
 
@@ -28,6 +32,16 @@ export class SearchService {
   updateSearchResults(results: Destination[]): void {
     this.searchResultsSubject.next(results);
     this.hasSearchedSubject.next(true);
+  }
+  
+  // Set previous route before search
+  setPreviousRoute(route: string): void {
+    this.previousRouteSubject.next(route);
+  }
+  
+  // Get previous route
+  getPreviousRoute(): string {
+    return this.previousRouteSubject.getValue();
   }
 
   // Update search query

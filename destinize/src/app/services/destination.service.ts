@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Destination } from '../models/destination';
-import { DESTINATIONS } from '../mock-data/destinations';
+import { Destinations } from '../mock-data/destinations';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DestinationService {
-  private destinations: Destination[] = DESTINATIONS;
+  private destinations: Destination[] = Destinations;
 
   constructor() { }
 
@@ -32,21 +32,21 @@ export class DestinationService {
     if (!query || query.trim() === '') {
       return this.getDestinations();
     }
-    
+
     query = query.toLowerCase().trim();
-    
+
     return of(this.destinations.filter(d => {
       // Search by name, location, description
-      const basicMatch = d.name.toLowerCase().includes(query) || 
+      const basicMatch = d.name.toLowerCase().includes(query) ||
                        d.location.toLowerCase().includes(query) ||
                        d.description.toLowerCase().includes(query);
-      
+
       // Search by region
       const regionMatch = d.region.toLowerCase().includes(query);
-      
+
       // Search by emoji tags
       const tagMatch = d.tags.some(tag => tag.includes(query));
-      
+
       return basicMatch || regionMatch || tagMatch;
     }));
   }

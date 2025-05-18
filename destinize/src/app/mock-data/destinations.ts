@@ -1,6 +1,86 @@
 import { Destination } from '../models/destination';
 
-export const DESTINATIONS: Destination[] = [
+export const Destinations: Destination[] = [
+  // India
+  {
+    id: 31,
+    name: 'Jaipur',
+    location: 'India',
+    region: 'Asia',
+    tags: ['🏰', '🐘', '🎨'],
+    image: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    description: 'The Pink City with magnificent palaces, colorful bazaars, and rich Rajasthani culture.',
+    price: 850,
+    rating: 4.7
+  },
+  {
+    id: 32,
+    name: 'Goa',
+    location: 'India',
+    region: 'Asia',
+    tags: ['🏖️', '🌴', '🎉'],
+    image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    description: 'Beach paradise with golden sands, vibrant nightlife, and Portuguese-influenced architecture.',
+    price: 750,
+    rating: 4.6,
+    featured: true
+  },
+  {
+    id: 33,
+    name: 'Varanasi',
+    location: 'India',
+    region: 'Asia',
+    tags: ['🛕', '🚣', '🕯️'],
+    image: 'https://images.unsplash.com/photo-1561361058-c24cecae35ca?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    description: 'Ancient spiritual city on the banks of the Ganges with sacred ghats and rituals.',
+    price: 650,
+    rating: 4.5
+  },
+  {
+    id: 34,
+    name: 'Darjeeling',
+    location: 'India',
+    region: 'Asia',
+    tags: ['🍵', '🚂', '🏔️'],
+    image: 'https://images.unsplash.com/photo-1544634076-a90160ddf44c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    description: 'Himalayan town famous for tea plantations, mountain views, and the toy train.',
+    price: 700,
+    rating: 4.4
+  },
+  {
+    id: 35,
+    name: 'Kerala Backwaters',
+    location: 'India',
+    region: 'Asia',
+    tags: ['🚣', '🌴', '🌿'],
+    image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    description: 'Serene network of lagoons, canals, and lakes with traditional houseboat experiences.',
+    price: 800,
+    rating: 4.8
+  },
+  {
+    id: 36,
+    name: 'Agra',
+    location: 'India',
+    region: 'Asia',
+    tags: ['🏛️', '💎', '🏰'],
+    image: 'https://images.unsplash.com/photo-1564507592333-c60657eea523?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    description: 'Home to the iconic Taj Mahal, Agra Fort, and other Mughal architectural wonders.',
+    price: 780,
+    rating: 4.7,
+    featured: true
+  },
+  {
+    id: 37,
+    name: 'Udaipur',
+    location: 'India',
+    region: 'Asia',
+    tags: ['🏰', '💦', '🌅'],
+    image: 'https://images.unsplash.com/photo-1602341628290-7bf1b224e9f1?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    description: 'Romantic lake city with majestic palaces, temples, and scenic beauty.',
+    price: 820,
+    rating: 4.6
+  },
   // Europe
   {
     id: 1,

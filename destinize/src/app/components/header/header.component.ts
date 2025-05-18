@@ -3,6 +3,9 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 import { DestinationService } from '../../services/destination.service';
 import { SearchService } from '../../services/search.service';
+import { RegionService } from '../../services/region.service';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +16,7 @@ import { SearchService } from '../../services/search.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   searchControl = new FormControl('');
   regions: string[] = [];
+  selectedRegion: string = ''; // Property to track selected region
   currentPlaceholder = 'Search destinations...';
   placeholders = [
     'Search destinations by region/emojis',
@@ -24,11 +28,27 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ];
   private placeholderInterval: any;
   private searchSubscription: Subscription = new Subscription();
+  private regionSubscription: Subscription = new Subscription();
 
+  // Track current route to customize search behavior
+  currentRoute: string = '/';
   constructor(
     private destinationService: DestinationService,
-    private searchService: SearchService
-  ) {}
+    private searchService: SearchService,
+    private regionService: RegionService,
+    private router: Router
+  ) {
+    // Track route changes to adjust search behavior
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      this.currentRoute = event.url;
+
+      // Update the national page flag in the region service
+      const isNationalPage = this.currentRoute === '/national';
+      this.regionService.setIsNationalPage(isNationalPage);
+    });
+  }
 
   ngOnInit(): void {
     // Load regions
@@ -37,6 +57,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     // Start rotating placeholders
     this.startPlaceholderRotation();
 
+    // Set initial route
+    this.currentRoute = this.router.url;
+
+    // Set initial national page flag
+    const isNationalPage = this.currentRoute === '/national';
+    this.regionService.setIsNationalPage(isNationalPage);
+
+    // Subscribe to selected region changes
+    this.regionSubscription = this.regionService.selectedRegion$.subscribe(region => {
+      this.selectedRegion = region;
+    });
     // Subscribe to changes in the search input
     this.searchSubscription = this.searchControl.valueChanges
       .pipe(
@@ -47,6 +78,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         // If search is empty, clear the search state
         if (!query || query.trim() === '') {
           this.searchService.clearSearch();
+
+          // If we're on the destinations page and there was a previous page, go back to it
+          if (this.currentRoute === '/destinations' && this.searchService.getPreviousRoute() !== '/destinations') {
+            this.router.navigate([this.searchService.getPreviousRoute()]);
+          }
           return;
         }
 
@@ -55,6 +91,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
         // Perform the search and update results
         this.destinationService.searchDestinations(query).subscribe(results => {
+          // If not on the destinations page, save current route and navigate to destinations
+          if (this.currentRoute !== '/destinations') {
+            // Save the current route before navigating away
+            this.searchService.setPreviousRoute(this.currentRoute);
+            this.router.navigate(['/destinations']);
+          }
+
           this.searchService.updateSearchResults(results);
         });
       });
@@ -81,9 +124,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const select = event.target as HTMLSelectElement;
     const region = select.value;
 
+    // Update the region service with the selected region
+    this.regionService.updateSelectedRegion(region);
+
     if (!region) {
       // If "All Regions" is selected, clear the search
       this.searchService.clearSearch();
+
+      // If on national page and selecting All Regions, redirect to destinations page
+      if (this.currentRoute === '/national') {
+        this.router.navigate(['/destinations']);
+      }
       return;
     }
 
@@ -91,6 +142,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.destinationService.getDestinationsByRegion(region).subscribe(results => {
       this.searchService.updateSearchQuery(`Region: ${region}`);
       this.searchService.updateSearchResults(results);
+
+      // Stay on the current page if it's international, otherwise navigate to destinations
+      if (this.currentRoute !== '/international') {
+        // Only navigate to destinations if not on the international page
+        this.router.navigate(['/destinations']);
+      }
     });
   }
 
@@ -111,6 +168,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.searchSubscription.unsubscribe();
     }
 
+    if (this.regionSubscription) {
+      this.regionSubscription.unsubscribe();
+    }
+
     // Clear placeholder rotation interval
     if (this.placeholderInterval) {
       clearInterval(this.placeholderInterval);
@@ -120,6 +181,38 @@ export class HeaderComponent implements OnInit, OnDestroy {
   // Method to handle search form submission (prevent form default action)
   onSearchSubmit(event: Event): void {
     event.preventDefault();
-    // The search is already triggered by valueChanges
+    const query = this.searchControl.value;
+
+    // If search is empty, do nothing
+    if (!query || query.trim() === '') {
+      return;
+    }
+
+    // Update the search query in the service
+    this.searchService.updateSearchQuery(query);
+
+    // Perform the search and update results
+    this.destinationService.searchDestinations(query).subscribe(results => {
+      // Save the current route before navigating away
+      this.searchService.setPreviousRoute(this.currentRoute);
+      // this.router.navigate(['/destinations']);
+
+      this.searchService.updateSearchResults(results);
+    });
+  }
+  
+  // Reset all filters and search state when clicking on the Destinize logo
+  resetAllFilters(): void {
+    // Clear search input
+    this.searchControl.setValue('');
+    
+    // Clear search state
+    this.searchService.clearSearch();
+    
+    // Reset region selection
+    this.regionService.updateSelectedRegion('');
+    
+    // Navigate to home page
+    this.router.navigate(['/']);
   }
 }

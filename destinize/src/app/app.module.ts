@@ -18,6 +18,9 @@ import { HeroSectionComponent } from './components/hero-section/hero-section.com
 import { DestinationCarouselComponent } from './components/destination-carousel/destination-carousel.component';
 import { DestinationDetailComponent } from './components/destination-detail/destination-detail.component';
 import { HomeComponent } from './components/home/home.component';
+import { DestinationsComponent } from './pages/destinations/destinations.component';
+import { NationalComponent } from './pages/national/national.component';
+import { InternationalComponent } from './pages/international/international.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { HomeComponent } from './components/home/home.component';
     DestinationCarouselComponent,
     DestinationDetailComponent,
     HomeComponent,
+    DestinationsComponent,
+    NationalComponent,
+    InternationalComponent
   ],
   imports: [
     BrowserModule,
