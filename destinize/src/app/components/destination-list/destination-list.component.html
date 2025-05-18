@@ -7,12 +7,12 @@
         Showing results for "{{ currentSearchQuery }}"
       </p>
     </div>
-    
+
     <div class="destinations-grid">
       <div class="grid-item" *ngFor="let destination of searchResults">
         <app-destination-card [destination]="destination"></app-destination-card>
       </div>
-      
+
       <!-- Empty Search Results State -->
       <div class="empty-state" *ngIf="searchResults.length === 0 && currentSearchQuery">
         <div class="empty-icon">🔍</div>
@@ -21,7 +21,6 @@
       </div>
     </div>
   </section>
-  
   <!-- Hide regular content when showing search results -->
   <ng-container *ngIf="!showSearchResults">
   <!-- Featured Destinations Section -->
@@ -30,21 +29,21 @@
       <h2 class="section-title">Featured Destinations</h2>
       <p class="section-subtitle">Discover our handpicked selection of incredible places</p>
     </div>
-    
+
     <div class="featured-grid">
       <div class="featured-item" *ngFor="let destination of featuredDestinations">
         <app-destination-card [destination]="destination"></app-destination-card>
       </div>
     </div>
   </section>
-  
+
   <!-- Filters Section -->
   <section class="discover-section">
     <div class="section-header">
       <h2 class="section-title">Discover Places</h2>
       <p class="section-subtitle">Explore destinations by region or interest</p>
     </div>
-    
+
     <div class="filters-section">
       <div class="region-filters">
         <button class="filter-button" [class.active]="selectedRegion === ''" (click)="clearFilter()">
@@ -59,13 +58,13 @@
         </button>
       </div>
     </div>
-    
+
     <!-- Filtered Destinations Grid -->
     <div class="destinations-grid">
       <div class="grid-item" *ngFor="let destination of filteredDestinations">
         <app-destination-card [destination]="destination"></app-destination-card>
       </div>
-      
+
       <!-- Empty State -->
       <div class="empty-state" *ngIf="filteredDestinations.length === 0">
         <div class="empty-icon">😔</div>
@@ -75,35 +74,31 @@
       </div>
     </div>
   </section>
-  
+
   <!-- Asia Spotlight Section -->
   <section class="spotlight-section" *ngIf="asiaDestinations.length > 0">
     <div class="section-header">
       <h2 class="section-title">Asia Spotlight</h2>
       <p class="section-subtitle">Explore the wonders of Asia's most captivating destinations</p>
     </div>
-    
-    <div class="horizontal-scroll">
-      <div class="scroll-wrapper">
-        <div class="scroll-item" *ngFor="let destination of asiaDestinations">
-          <app-destination-card [destination]="destination"></app-destination-card>
-        </div>
+
+    <div class="destinations-grid">
+      <div class="grid-item" *ngFor="let destination of asiaDestinations">
+        <app-destination-card [destination]="destination"></app-destination-card>
       </div>
     </div>
   </section>
-  
+
   <!-- Europe Collection Section -->
   <section class="spotlight-section" *ngIf="europeDestinations.length > 0">
     <div class="section-header">
       <h2 class="section-title">Europe Collection</h2>
       <p class="section-subtitle">Experience the charm and history of European destinations</p>
     </div>
-    
-    <div class="horizontal-scroll">
-      <div class="scroll-wrapper">
-        <div class="scroll-item" *ngFor="let destination of europeDestinations">
-          <app-destination-card [destination]="destination"></app-destination-card>
-        </div>
+
+    <div class="destinations-grid">
+      <div class="grid-item" *ngFor="let destination of europeDestinations">
+        <app-destination-card [destination]="destination"></app-destination-card>
       </div>
     </div>
   </section>

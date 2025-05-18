@@ -16,6 +16,8 @@ import { DestinationCardComponent } from './components/destination-card/destinat
 import { DestinationListComponent } from './components/destination-list/destination-list.component';
 import { HeroSectionComponent } from './components/hero-section/hero-section.component';
 import { DestinationCarouselComponent } from './components/destination-carousel/destination-carousel.component';
+import { DestinationDetailComponent } from './components/destination-detail/destination-detail.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { DestinationCarouselComponent } from './components/destination-carousel/
     DestinationListComponent,
     HeroSectionComponent,
     DestinationCarouselComponent,
+    DestinationDetailComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

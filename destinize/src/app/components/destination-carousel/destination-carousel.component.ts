@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DestinationService } from '../../services/destination.service';
 import { Destination } from '../../models/destination';
 
@@ -16,7 +17,10 @@ export class DestinationCarouselComponent implements OnInit {
   touchStartX = 0;
   touchEndX = 0;
 
-  constructor(private destinationService: DestinationService) {}
+  constructor(
+    private destinationService: DestinationService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadDestinations();
@@ -97,8 +101,6 @@ export class DestinationCarouselComponent implements OnInit {
   }
 
   viewDestinationDetails(destinationId: number): void {
-    console.log('Viewing details for destination ID:', destinationId);
-    // This would navigate to the destination details page
-    // In a future implementation, this would use the Router to navigate
+    this.router.navigate(['/destinations', destinationId]);
   }
 }

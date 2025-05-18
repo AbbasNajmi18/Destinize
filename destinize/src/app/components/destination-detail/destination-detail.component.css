@@ -1,0 +1,514 @@
+/* Main Container */
+.destination-detail-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Loading State */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 2rem;
+}
+
+.loader {
+  border: 5px solid var(--destinize-bg);
+  border-top: 5px solid var(--destinize-primary);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1.5s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: 70vh;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.hero-section:hover .hero-image {
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.7));
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 2rem;
+  width: 100%;
+  color: white;
+}
+
+.destination-name {
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.destination-location {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.destination-tags {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--destinize-primary);
+  color: #333;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+}
+
+.destination-stats {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+}
+
+.stat-icon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/* Main Content */
+.content-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.section-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--destinize-primary);
+}
+
+.destination-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+/* Attractions */
+.attractions-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.attraction-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background-color: var(--destinize-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.attraction-item:hover {
+  transform: translateY(-5px);
+}
+
+.attraction-icon {
+  font-size: 2rem;
+}
+
+.attraction-content h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.attraction-content p {
+  margin: 0;
+  color: #666;
+}
+
+/* Seasons */
+.season-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.season {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: var(--destinize-bg);
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.season:hover {
+  transform: translateY(-5px);
+}
+
+.season-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.season h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.season p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Sidebar */
+.sidebar {
+  position: sticky;
+  top: 2rem;
+  align-self: start;
+}
+
+.sidebar-section {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
+}
+
+.sidebar-title {
+  font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #333;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.sidebar-title:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background-color: var(--destinize-primary);
+}
+
+.quick-facts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.quick-facts li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.fact-icon {
+  margin-right: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.fact-label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.map-placeholder {
+  height: 200px;
+  background-color: var(--destinize-bg);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #666;
+}
+
+.map-icon {
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+}
+
+.hotel-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: var(--destinize-bg);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.hotel-item:hover {
+  transform: translateX(5px);
+}
+
+.hotel-icon {
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+}
+
+.hotel-content {
+  flex: 1;
+}
+
+.hotel-content h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.hotel-price {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Related Destinations */
+.related-destinations {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.related-item {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.related-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.related-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.related-content {
+  padding: 1rem;
+  background-color: white;
+}
+
+.related-name {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.2rem;
+}
+
+.related-location {
+  color: #666;
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+}
+
+.related-button {
+  background-color: var(--destinize-primary);
+  color: #333;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.related-button:hover {
+  background-color: var(--destinize-secondary);
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.return-btn {
+  background-color: var(--destinize-primary);
+  color: #333;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.return-btn:hover {
+  background-color: var(--destinize-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .content-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar {
+    position: static;
+    margin-top: 2rem;
+  }
+  
+  .hero-section {
+    height: 60vh;
+  }
+  
+  .destination-name {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 50vh;
+  }
+  
+  .destination-name {
+    font-size: 2.5rem;
+  }
+  
+  .destination-location {
+    font-size: 1.5rem;
+  }
+  
+  .season-info {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-section {
+    height: 40vh;
+  }
+  
+  .hero-content {
+    padding: 1.5rem;
+  }
+  
+  .destination-name {
+    font-size: 2rem;
+  }
+  
+  .destination-location {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .destination-stats {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .related-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .season-info {
+    grid-template-columns: 1fr;
+  }
+}

@@ -3,18 +3,8 @@
   <div class="logo-container">
     <a class="logo">
       <span class="logo-icon">🌍</span>
-      <span class="logo-text">Destinize</span>
+      <span routerLink="/" class="logo-text">Destinize</span>
     </a>
-  </div>
-
-  <!-- Search Bar -->
-  <div class="search-container">
-    <form (submit)="onSearchSubmit($event)" class="search-form">
-      <div class="search-field">
-        <span class="search-icon">🔍</span>
-        <input type="text" [placeholder]="currentPlaceholder" [formControl]="searchControl">
-      </div>
-    </form>
   </div>
 
   <!-- Navigation Links with Region Dropdown -->
@@ -27,9 +17,19 @@
       </select>
     </div>
     <button>Destinations</button>
-    <button>Deals</button>
+    <button>National</button>
+    <button>International</button>
     <button>Regions</button>
-    <button>About</button>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <form (submit)="onSearchSubmit($event)" class="search-form">
+      <div class="search-field">
+        <span class="search-icon">🔍</span>
+        <input type="text" [placeholder]="currentPlaceholder" [formControl]="searchControl">
+      </div>
+    </form>
   </div>
 
   <!-- Mobile Menu Button -->
